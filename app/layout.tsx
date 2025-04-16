@@ -114,6 +114,7 @@ export default function RootLayout({
     <html lang="ru" className="scroll-smooth" suppressHydrationWarning>
       <head>
         <meta name="yandex-verification" content="7232e4473ad86f08" />
+        <meta name="google-site-verification" content="kznExNb0oY3kg9DNqBy-SUNgIpJ6TNAh1-QgzHYwrT4" />
       </head>
       <body className={`${inter.variable} ${roboto.className} font-sans bg-background text-text`} suppressHydrationWarning>
         <Preloader />
