@@ -112,7 +112,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ru" className="scroll-smooth" suppressHydrationWarning>
-      <head />
+      <head>
+        <meta name="yandex-verification" content="7232e4473ad86f08" />
+      </head>
       <body className={`${inter.variable} ${roboto.className} font-sans bg-background text-text`} suppressHydrationWarning>
         <Preloader />
         <MickeyMouse />
