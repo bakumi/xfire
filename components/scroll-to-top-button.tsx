@@ -1,10 +1,11 @@
 "use client"
 
-import { useState, useEffect, useCallback } from "react"
+import { useState, useEffect, useCallback, useRef } from "react"
 import { ArrowUp } from "lucide-react"
 
 const ScrollToTopButton = () => {
   const [isVisible, setIsVisible] = useState(false)
+  const buttonRef = useRef<HTMLButtonElement>(null)
 
   // Функция throttle для ограничения частоты вызовов обработчика прокрутки
   const throttle = <T extends (...args: any[]) => any>(func: T, limit: number) => {
@@ -43,8 +44,16 @@ const ScrollToTopButton = () => {
     })
   }
 
+  // Снимаем фокус, если кнопка становится невидимой
+  useEffect(() => {
+    if (!isVisible && buttonRef.current && document.activeElement === buttonRef.current) {
+      buttonRef.current.blur()
+    }
+  }, [isVisible])
+
   return (
     <button
+      ref={buttonRef}
       onClick={scrollToTop}
       className={`fixed bottom-6 right-6 z-50 bg-primary text-white p-3 rounded-full shadow-lg transition-all duration-500 hover:scale-110 active:scale-90 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 ${
         isVisible 
@@ -52,7 +61,9 @@ const ScrollToTopButton = () => {
           : "opacity-0 transform translate-y-10 pointer-events-none"
       }`}
       aria-label="Прокрутить наверх"
-      aria-hidden={!isVisible}
+      aria-hidden={!isVisible ? "true" : undefined}
+      tabIndex={!isVisible ? -1 : 0}
+      inert={!isVisible}
     >
       <ArrowUp className="h-5 w-5" />
       <span className="sr-only">Прокрутить наверх</span>
