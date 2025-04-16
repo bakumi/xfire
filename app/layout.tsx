@@ -95,11 +95,6 @@ export const metadata: Metadata = {
     description: "Профессиональные услуги в сфере пожарной безопасности",
     images: ["/og-image.png"],
   },
-  viewport: {
-    width: "device-width",
-    initialScale: 1,
-    maximumScale: 1,
-  },
   robots: {
     index: true,
     follow: true,
