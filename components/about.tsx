@@ -8,7 +8,7 @@ const About = () => {
   const statsRef = useRef<HTMLDivElement>(null)
 
   return (
-    <section id="licenses" className="py-16 md:py-24 bg-gray-50 relative overflow-hidden">
+    <section id="about" className="py-16 md:py-24 bg-gray-50 relative overflow-hidden">
       {/* Декоративные элементы */}
       <div className="absolute top-0 left-0 w-full h-20 bg-gradient-to-b from-white to-transparent"></div>
       <div className="absolute bottom-0 left-0 w-full h-20 bg-gradient-to-t from-white to-transparent"></div>
