@@ -22,6 +22,8 @@ const MICKEY_CONFIG = {
   distanceFromEdge: 0, // Отступ от края экрана при движении по периметру (в пикселях)
   navbarHeight: 80, // Высота навигационного меню (в пикселях)
   respectNavbar: true, // Учитывать высоту навигационного меню при движении по верхнему краю
+  showOnMobile: true, // Показывать ли Микки на мобильных устройствах
+  mobileSize: 80, // Размер Микки на мобильных устройствах (в пикселях)
 }
 
 
@@ -47,6 +49,7 @@ const MickeyMouse = () => {
   const [windowHeight, setWindowHeight] = useState(0) // Сохраняем высоту окна в состоянии
   const [isMounted, setIsMounted] = useState(false) // Флаг монтирования компонента
   const [navbarHeight, setNavbarHeight] = useState(MICKEY_CONFIG.navbarHeight) // Высота навигационного меню
+  const [isMobile, setIsMobile] = useState(false)
   const requestRef = useRef<number | null>(null)
   const bounceRef = useRef(0)
   const directionRef = useRef(MICKEY_CONFIG.initialDirection)
@@ -69,11 +72,9 @@ const MickeyMouse = () => {
     }
     
     const handleResize = () => {
-      if (window.innerWidth < 640) { // Для мобильных устройств
-        setShowMickey(false)
-      } else {
-        setShowMickey(SHOW_MICKEY)
-      }
+      const isMobileView = window.innerWidth < 640
+      setIsMobile(isMobileView)
+      setShowMickey(MICKEY_CONFIG.showOnMobile || !isMobileView ? SHOW_MICKEY : false)
       setWindowHeight(window.innerHeight)
       
       // Обновляем высоту навигационного меню при изменении размера окна
@@ -335,8 +336,8 @@ const MickeyMouse = () => {
     <div 
       className="fixed z-50 pointer-events-none"
       style={{
-        width: `${MICKEY_CONFIG.size}px`,
-        height: `${MICKEY_CONFIG.size}px`,
+        width: `${isMobile ? MICKEY_CONFIG.mobileSize : MICKEY_CONFIG.size}px`,
+        height: `${isMobile ? MICKEY_CONFIG.mobileSize : MICKEY_CONFIG.size}px`,
         ...positionStyles
       }}
       aria-hidden="true"
