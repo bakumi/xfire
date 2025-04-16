@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Sitemap: https://centrpozhtech.ru/sitemap.xml
+Host: centrpozhtech.ru 
