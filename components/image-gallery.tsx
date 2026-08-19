@@ -28,13 +28,11 @@ const ImageGallery = ({ images }: ImageGalleryProps) => {
   const openGallery = (index: number) => {
     setCurrentIndex(index)
     setIsOpen(true)
-    // Предотвращаем прокрутку страницы при открытой галерее
     document.body.style.overflow = "hidden"
   }
 
   const closeGallery = () => {
     setIsOpen(false)
-    // Возвращаем прокрутку страницы
     document.body.style.overflow = "auto"
   }
 
@@ -56,7 +54,6 @@ const ImageGallery = ({ images }: ImageGalleryProps) => {
     }
   }
 
-  // Добавляем обработчик клавиш при открытии галереи
   useEffect(() => {
     const handleKeyDownEvent = (e: KeyboardEvent) => {
       if (isOpen) {

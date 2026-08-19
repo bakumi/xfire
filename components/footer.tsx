@@ -17,19 +17,13 @@ import {
 } from "lucide-react"
 import { useServiceContext } from "@/app/context/ServiceContext"
 
-// Компонент красного квадрата с кружком в центре
 const RedSquareWithCircle = () => {
   return (
     <div className="relative w-10 h-10">
-      {/* Внешняя красная рамка */}
       <div className="absolute inset-0 bg-red-600"></div>
-      {/* Внутренняя белая рамка */}
       <div className="absolute inset-[2px] bg-white"></div>
-      {/* Внутренний красный квадрат */}
       <div className="absolute inset-[5px] bg-red-600 flex items-center justify-center">
-        {/* Белый круг */}
         <div className="w-6 h-6 bg-white rounded-full flex items-center justify-center">
-          {/* Красный кружок в центре */}
           <div className="w-2 h-2 bg-red-600 rounded-full"></div>
         </div>
       </div>
@@ -40,7 +34,6 @@ const RedSquareWithCircle = () => {
 const Footer = () => {
   const currentYear = new Date().getFullYear()
   
-  // Оборачиваем в try-catch для работы на странице 404, где может не быть доступа к контексту
   let serviceContext;
   try {
     serviceContext = useServiceContext()
@@ -53,7 +46,6 @@ const Footer = () => {
   
   const { setActiveServiceId, scrollToServices } = serviceContext
 
-  // Обработчик клика по услуге в футере
   const handleServiceClick = (serviceId: number, e: React.MouseEvent) => {
     e.preventDefault()
     if (setActiveServiceId) setActiveServiceId(serviceId)
@@ -62,7 +54,6 @@ const Footer = () => {
 
   return (
     <footer className="bg-[#141c2c] text-gray-300 relative overflow-hidden">
-      {/* Волнистая линия в фоне */}
       <div className="absolute top-0 left-0 w-full opacity-10">
         <svg viewBox="0 0 1200 120" preserveAspectRatio="none" className="w-full h-20">
           <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" fill="currentColor"></path>
@@ -214,7 +205,6 @@ const Footer = () => {
         </div>
       </div>
       
-      {/* Нижняя волнистая линия */}
       <div className="absolute bottom-0 left-0 w-full opacity-10 transform rotate-180">
         <svg viewBox="0 0 1200 120" preserveAspectRatio="none" className="w-full h-20">
           <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" fill="currentColor"></path>

@@ -8,18 +8,15 @@ interface ServiceContextType {
   scrollToServices: () => void;
 }
 
-// Создаем контекст с начальными значениями
 const ServiceContext = createContext<ServiceContextType>({
   activeServiceId: 1,
   setActiveServiceId: () => {},
   scrollToServices: () => {},
 });
 
-// Провайдер контекста
 export const ServiceProvider = ({ children }: { children: ReactNode }) => {
   const [activeServiceId, setActiveServiceId] = useState<number>(1);
 
-  // Функция для прокрутки к секции услуг и выбора нужной услуги
   const scrollToServices = () => {
     const servicesSection = document.getElementById('services');
     if (servicesSection) {
@@ -40,5 +37,4 @@ export const ServiceProvider = ({ children }: { children: ReactNode }) => {
   );
 };
 
-// Хук для использования контекста
 export const useServiceContext = () => useContext(ServiceContext); 

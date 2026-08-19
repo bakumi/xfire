@@ -18,7 +18,6 @@ const Hero = () => {
     setMounted(true)
   }, [])
 
-  // Анимация появления при монтировании
   useEffect(() => {
     if (mounted && sectionRef.current) {
       const title = titleRef.current
@@ -31,11 +30,9 @@ const Hero = () => {
       if (title && subtitle && buttons && image && badges && wavePath) {
         const tl = gsap.timeline({ defaults: { ease: "power3.out" } })
         
-        // Начальные состояния
         gsap.set([title, subtitle, buttons, image, badges.children], { opacity: 0, y: 30 })
         gsap.set(wavePath, { strokeDasharray: 200, strokeDashoffset: 200 })
 
-        // Анимация
         tl.delay(1.1)
           .fromTo(title, { y: 50, opacity: 0 }, { y: 0, opacity: 1, duration: 1 }, 0)
           .fromTo(subtitle, { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 1 }, "-=0.8")
@@ -51,7 +48,6 @@ const Hero = () => {
     }
   }, [mounted])
 
-  // Возвращаем базовую версию компонента до монтирования
   if (!mounted) {
     return (
       <section id="hero" className="pt-24 pb-16 md:pt-32 md:pb-24 relative overflow-hidden opacity-0">
@@ -74,7 +70,6 @@ const Hero = () => {
 
   return (
     <section ref={sectionRef} id="hero" className="pt-24 pb-16 md:pt-32 md:pb-24 relative overflow-hidden">
-      {/* Добавляем CSS-анимацию для волнистой линии */}
       <style jsx>{`
         @keyframes drawWave {
           to {
@@ -83,7 +78,6 @@ const Hero = () => {
         }
       `}</style>
       
-      {/* Декоративные элементы */}
       <div className="absolute -top-20 -right-20 w-80 h-80 rounded-full bg-primary/5 -z-10"></div>
       <div className="absolute -bottom-20 -left-20 w-80 h-80 rounded-full bg-secondary/5 -z-10"></div>
       <div className="absolute top-1/4 right-10 w-20 h-20 rounded-full bg-primary/10 -z-10"></div>

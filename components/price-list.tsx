@@ -4,7 +4,6 @@ import React from 'react'
 import { useState } from "react"
 import { Flame, Droplets, Ruler, FileText, HardHat, Trash2, Wrench, Settings, Map, GraduationCap, BookOpen, Loader, Hammer, Stars } from "lucide-react"
 
-// Компонент-обертка для иконок
 const IconWrapper = ({ icon: Icon, ...props }: { icon: React.ComponentType<any>, [key: string]: any }) => {
   if (!Icon) return null;
   return <Icon {...props} />;
@@ -27,7 +26,6 @@ const PriceList = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
   const [isPriceVisible, setIsPriceVisible] = useState(false)
 
-  // Закрытие выпадающего списка при клике вне его
   React.useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       const dropdown = document.getElementById('mobile-dropdown');
@@ -258,7 +256,6 @@ const PriceList = () => {
         </div>
 
         <div className="mb-8">
-          {/* Мобильное представление - кастомный выпадающий список */}
           <div className="md:hidden mb-4">
             <div className="relative">
               <button 
@@ -301,7 +298,6 @@ const PriceList = () => {
             </div>
           </div>
           
-          {/* Десктопное представление - улучшенные табы */}
           <div className="hidden md:block">
             <div className="grid grid-cols-3 lg:grid-cols-7 gap-2">
               {priceCategories.map((category) => (

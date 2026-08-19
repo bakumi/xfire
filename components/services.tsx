@@ -104,7 +104,6 @@ const Services = () => {
 
   return (
     <section id="services" className="py-16 md:py-24 relative overflow-hidden">
-      {/* Декоративные элементы */}
       <div className="absolute top-0 right-0 w-64 h-64 bg-secondary/5 rounded-full -z-10 transform translate-x-1/2 -translate-y-1/2"></div>
       <div className="absolute bottom-0 left-0 w-48 h-48 bg-primary/5 rounded-full -z-10 transform -translate-x-1/2 translate-y-1/2"></div>
 
@@ -136,7 +135,6 @@ const Services = () => {
               onClick={() => handleServiceChange(service.id)}
               disabled={isChanging}
             >
-              {/* Декоративный элемент */}
               <div className="absolute -bottom-4 -right-4 w-16 h-16 rounded-full bg-white/10 z-0"></div>
 
               <div className="relative z-10">
@@ -156,7 +154,6 @@ const Services = () => {
                   {service.description}
                 </p>
                 
-                {/* Индикатор кликабельности */}
                 <div className={`mt-4 flex justify-end ${activeServiceId === service.id ? "text-white/80" : "text-secondary"}`}>
                   <ArrowRight className="h-5 w-5" />
                 </div>
@@ -185,7 +182,6 @@ const Services = () => {
               {activeServiceData.price}
             </div>
 
-            {/* Декоративные элементы */}
             <div
               className="absolute bottom-4 left-4 bg-white/90 p-2 rounded-full shadow-lg"
             >

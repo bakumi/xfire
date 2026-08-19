@@ -4,19 +4,13 @@ import { useState, useEffect, useCallback } from "react"
 import Link from 'next/link'
 import { Menu, X, Phone } from "lucide-react"
 
-// Компонент красного квадрата с кружком в центре
 const RedSquareWithCircle = () => {
   return (
     <div className="relative w-10 h-10">
-      {/* Внешняя красная рамка */}
       <div className="absolute inset-0 bg-red-600"></div>
-      {/* Внутренняя белая рамка */}
       <div className="absolute inset-[2px] bg-white"></div>
-      {/* Внутренний красный квадрат */}
       <div className="absolute inset-[5px] bg-red-600 flex items-center justify-center">
-        {/* Белый круг */}
         <div className="w-6 h-6 bg-white rounded-full flex items-center justify-center">
-          {/* Красный кружок в центре */}
           <div className="w-2 h-2 bg-red-600 rounded-full"></div>
         </div>
       </div>
@@ -24,14 +18,12 @@ const RedSquareWithCircle = () => {
   );
 };
 
-// Использование имени NotFound важно для Next.js
 export default function NotFound() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
   const [animationState, setAnimationState] = useState(0)
   const [mounted, setMounted] = useState(false)
   
-  // Улучшенная логика отслеживания прокрутки с меньшей частотой вызовов
   const handleScroll = useCallback(() => {
     if (window.scrollY > 50) {
       if (!isScrolled) setIsScrolled(true)
@@ -40,14 +32,11 @@ export default function NotFound() {
     }
   }, [isScrolled])
   
-  // Функции для шапки
   useEffect(() => {
     setMounted(true)
     
-    // Инициализация состояния при загрузке
     handleScroll()
 
-    // Оптимизированный слушатель с троттлингом
     let ticking = false;
     const scrollListener = () => {
       if (!ticking) {
@@ -59,12 +48,10 @@ export default function NotFound() {
       }
     };
     
-    // Запускаем анимацию после загрузки страницы
     const timer = setTimeout(() => {
       setAnimationState(1)
     }, 100)
     
-    // Добавляем класс к body для стилизации
     document.body.classList.add('page-404');
     
     window.addEventListener("scroll", scrollListener, { passive: true });
@@ -84,7 +71,6 @@ export default function NotFound() {
     setIsMenuOpen(false)
   }
 
-  // Возвращаем заглушку до монтирования компонента
   if (!mounted) {
   return (
       <header className="fixed top-0 left-0 right-0 z-50 py-4 bg-white/90">
@@ -105,7 +91,6 @@ export default function NotFound() {
 
   return (
     <div className="min-h-screen flex flex-col bg-gray-50">
-      {/* Кастомная шапка только для страницы 404 - точно такая же, как на главной */}
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           isScrolled ? "bg-white shadow-md py-2" : "bg-white/90 backdrop-blur-sm py-4"
@@ -124,7 +109,6 @@ export default function NotFound() {
             </div>
           </Link>
 
-          {/* Десктопное меню */}
           <nav className="hidden md:flex items-center gap-8">
             <Link 
               href="/" 
@@ -191,7 +175,6 @@ export default function NotFound() {
             </Link>
           </nav>
 
-          {/* Мобильное меню */}
           <button
             className="md:hidden text-black"
             onClick={toggleMenu}
@@ -201,7 +184,6 @@ export default function NotFound() {
           </button>
         </div>
 
-        {/* Мобильное меню выпадающее */}
         <div
           className={`md:hidden absolute top-full left-0 right-0 bg-white shadow-md transition-all duration-300 ${
             isMenuOpen ? "max-h-screen opacity-100" : "max-h-0 opacity-0 overflow-hidden"
@@ -275,11 +257,9 @@ export default function NotFound() {
         </div>
       </header>
 
-      {/* Основной контент страницы */}
       <main className="flex-grow pt-32 pb-20">
         <div className="container mx-auto px-4">
           <div className={`max-w-4xl mx-auto transition-all duration-700 transform ${animationState === 0 ? 'opacity-0 translate-y-8' : 'opacity-100 translate-y-0'}`}>
-            {/* 404 блок */}
             <div className="bg-white rounded-xl shadow-lg overflow-hidden">
               <div className="relative bg-gradient-to-r from-red-500 to-red-600 p-8 text-white">
                 <div className="absolute top-0 right-0 p-4">
@@ -351,7 +331,6 @@ export default function NotFound() {
         </div>
       </main>
       
-      {/* Упрощенный футер для страницы 404 - без анимации */}
       <footer className="bg-[#141c2c] text-gray-300 relative overflow-hidden">
         <div className="absolute top-0 left-0 w-full opacity-10">
           <svg viewBox="0 0 1200 120" preserveAspectRatio="none" className="w-full h-20">
@@ -361,7 +340,6 @@ export default function NotFound() {
         
         <div className="container py-12 relative z-10">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {/* Логотип и описание - без animate-on-scroll */}
             <div>
               <div className="flex items-center gap-3 mb-4">
                 <div className="relative">
@@ -383,7 +361,6 @@ export default function NotFound() {
               <p className="mb-4 text-gray-400 leading-relaxed">Профессиональная установка и обслуживание пожарных систем с гарантией качества и безопасности</p>
             </div>
             
-            {/* Услуги - без animate-on-scroll */}
             <div>
               <h3 className="text-xl font-bold mb-4 text-white relative inline-block">Услуги<span className="absolute -bottom-1 left-0 w-12 h-0.5 bg-primary"></span></h3>
               <ul className="space-y-3">
@@ -414,7 +391,6 @@ export default function NotFound() {
               </ul>
             </div>
             
-            {/* Компания - без animate-on-scroll */}
             <div>
               <h3 className="text-xl font-bold mb-4 text-white relative inline-block">Компания<span className="absolute -bottom-1 left-0 w-12 h-0.5 bg-primary"></span></h3>
               <ul className="space-y-3">
@@ -445,7 +421,6 @@ export default function NotFound() {
               </ul>
             </div>
             
-            {/* Контакты - без animate-on-scroll */}
             <div>
               <h3 className="text-xl font-bold mb-4 text-white relative inline-block">Контакты<span className="absolute -bottom-1 left-0 w-12 h-0.5 bg-primary"></span></h3>
               <ul className="space-y-3">

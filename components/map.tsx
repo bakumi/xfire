@@ -14,7 +14,6 @@ import VectorSource from 'ol/source/Vector';
 import VectorLayer from 'ol/layer/Vector';
 import Overlay from 'ol/Overlay';
 
-
 const MapComponent = () => {
   const mapContainerRef = useRef<HTMLDivElement>(null);
   const popupContainerRef = useRef<HTMLDivElement>(null);
@@ -26,30 +25,20 @@ const MapComponent = () => {
   useEffect(() => {
     if (typeof window === 'undefined' || !mapContainerRef.current || !popupContainerRef.current) return;
     
-    // Очистка предыдущей карты при перерендере
     if (mapRef.current) {
-      // Уничтожаем предыдущий экземпляр карты
       mapRef.current.setTarget(undefined);
       mapRef.current = null;
     }
     
     try {
-      // Инициализация OpenLayers карты
-      
-      // Координаты ул. Скульптора Мухиной, д. 6 [долгота, широта]
       const addressCoordinates = fromLonLat([37.346506, 55.642835]);
-      
-      // Создаем слой OpenStreetMap
       const osmLayer = new TileLayer({
         source: new OSM(),
       });
 
-      // Создаем маркер
       const markerFeature = new Feature({
         geometry: new Point(addressCoordinates),
       });
-
-      // Устанавливаем стиль маркера
       markerFeature.setStyle(
         new Style({
           image: new Icon({
@@ -59,56 +48,36 @@ const MapComponent = () => {
           }),
         })
       );
-      
-      // Создаем источник векторных данных для маркера
       const vectorSource = new VectorSource({
         features: [markerFeature],
       });
-      
-      // Создаем векторный слой для маркера
       const vectorLayer = new VectorLayer({
         source: vectorSource,
       });
-
-      // Создаем карту
       const map = new Map({
         target: mapContainerRef.current,
         layers: [osmLayer, vectorLayer],
         view: new View({
           center: addressCoordinates,
-          zoom: 16, // Увеличиваем зум для лучшей видимости адреса
+          zoom: 16,
           maxZoom: 18,
           minZoom: 2,
         }),
       });
-
-      // Сохраняем экземпляр карты для возможности его уничтожения
       mapRef.current = map;
-      
-      // Создаем всплывающее окно с информацией
       const popup = new Overlay({
         element: popupContainerRef.current,
         positioning: 'bottom-center',
         stopEvent: false,
         offset: [0, -10],
       });
-      
-      // Добавляем всплывающее окно на карту
       map.addOverlay(popup);
-
-      // Устанавливаем всплывающее окно по координатам маркера
       popup.setPosition(addressCoordinates);
-
-      // Карта загружена
       setMapLoaded(true);
-      // OpenLayers карта успешно загружена
       
     } catch (err: any) {
-      // Ошибка при создании OpenLayers карты
       setMapError(`Не удалось загрузить карту: ${err.message || 'Неизвестная ошибка'}`);
     }
-    
-    // Очистка при размонтировании
     return () => {
       if (mapRef.current) {
         mapRef.current.setTarget(undefined);
@@ -119,14 +88,12 @@ const MapComponent = () => {
   
   return (
     <div className="h-full w-full relative">
-      {/* Контейнер для карты */}
       <div 
         ref={mapContainerRef}
         className="h-full w-full"
         style={{ display: mapError ? 'none' : 'block' }}
       />
       
-      {/* Всплывающее окно с информацией */}
       <div 
         ref={popupContainerRef} 
         className="ol-popup"
@@ -136,8 +103,6 @@ const MapComponent = () => {
           <p>Установка пожарных систем</p>
         </div>
       </div>
-      
-      {/* Стили для всплывающего окна */}
       <style jsx global>{`
         .ol-popup {
           background: white;
@@ -166,8 +131,6 @@ const MapComponent = () => {
           font-size: 12px;
         }
       `}</style>
-      
-      {/* Загрузка и ошибки */}
       {!mapLoaded && !mapError && (
         <div className="absolute inset-0 bg-gray-100 flex items-center justify-center">
           <div className="text-center">

@@ -7,7 +7,6 @@ const ScrollToTopButton = () => {
   const [isVisible, setIsVisible] = useState(false)
   const buttonRef = useRef<HTMLButtonElement>(null)
 
-  // Функция throttle для ограничения частоты вызовов обработчика прокрутки
   const throttle = <T extends (...args: any[]) => any>(func: T, limit: number) => {
     let inThrottle: boolean | undefined
     return function(this: any, ...args: Parameters<T>) {
@@ -22,13 +21,12 @@ const ScrollToTopButton = () => {
 
   const toggleVisibility = useCallback(
     throttle(() => {
-      // Показываем кнопку, когда пользователь прокрутил страницу на 500px вниз
       if (window.scrollY > 500) {
         setIsVisible(true)
       } else {
         setIsVisible(false)
       }
-    }, 100), // Ограничиваем до 10 раз в секунду
+    }, 100),
     []
   )
 
@@ -44,7 +42,6 @@ const ScrollToTopButton = () => {
     })
   }
 
-  // Снимаем фокус, если кнопка становится невидимой
   useEffect(() => {
     if (!isVisible && buttonRef.current && document.activeElement === buttonRef.current) {
       buttonRef.current.blur()

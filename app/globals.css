@@ -10,12 +10,10 @@
   --radius: 0.5rem;
 }
 
-/* Для текста с классом text-primary */
 .text-primary {
   color: rgb(var(--primary-color)) !important;
 }
 
-/* Импорт стилей для анимации Микки Мауса */
 @import '../styles/mickey-animation.css';
 
 @layer base {
@@ -27,7 +25,6 @@
   }
 }
 
-/* Custom scrollbar styles */
 ::-webkit-scrollbar {
   width: 8px;
 }
@@ -45,18 +42,15 @@
   background: #e64a19; 
 }
 
-/* Firefox scrollbar */
 * {
   scrollbar-width: thin;
   scrollbar-color: #ff5722 #f1f1f1;
 }
 
-/* Fixes for scrollbar corners (if applicable) */
 ::-webkit-scrollbar-corner {
   background: #f1f1f1;
 }
 
-/* Custom text selection color */
 ::selection {
   background-color: #ff5722;
   color: white;
@@ -77,20 +71,17 @@ body {
   -ms-overflow-style: none;
 }
 
-/* GSAP анимации */
 .gsap-reveal-hidden {
   visibility: hidden;
   opacity: 0;
 }
 
-/* Анимация для волнистой линии */
 @keyframes drawWave {
   to {
     stroke-dashoffset: 0;
   }
 }
 
-/* Стили для анимированного подчеркивания в навигации */
 .nav-link {
   padding: 4px 0;
   transition: color 0.3s;
@@ -148,7 +139,6 @@ body {
   }
 }
 
-/* Мобильная версия */
 .nav-link-mobile {
   display: inline-block;
   padding: 4px 0;
@@ -184,7 +174,6 @@ body {
   animation: navWaveDrawOut 0.5s ease-in-out forwards;
 }
 
-/* Оригинальная анимация для волнистой линии */
 @keyframes drawWave {
   to {
     stroke-dashoffset: 0;
@@ -218,14 +207,12 @@ body {
   }
 }
 
-/* Оптимизированные изображения */
 img {
   max-width: 100%;
   height: auto;
   display: block;
 }
 
-/* Оптимизированные анимации для скроллинга - оставляем для поддержки старого кода */
 .animate-on-scroll {
   opacity: 0;
   transform: translateY(20px);
@@ -237,7 +224,6 @@ img {
   transform: translateY(0);
 }
 
-/* Обеспечиваем видимость hero секции без старой анимации */
 #hero .animate-on-scroll,
 #hero .is-visible,
 .is-visible {
@@ -246,7 +232,6 @@ img {
   transition: none !important;
 }
 
-/* Анимации для галереи сертификатов */
 @keyframes overlayShow {
   from { background-color: rgba(0, 0, 0, 0); }
   to { background-color: rgba(0, 0, 0, 0.9); }
@@ -295,7 +280,6 @@ img {
   animation: contentHide 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-/* Стили для анимации смены услуг */
 @keyframes service-item-in {
   0% {
     opacity: 0;
@@ -326,7 +310,6 @@ img {
   animation: service-item-out 0.2s forwards ease-in;
 }
 
-/* Отключаем анимации при предпочтении уменьшенного движения */
 @media (prefers-reduced-motion: reduce) {
   .animate-on-scroll {
     transition: none;
@@ -338,7 +321,6 @@ img {
     scroll-behavior: auto;
   }
   
-  /* Отключаем GSAP анимации */
   [data-scroll-animation] {
     opacity: 1 !important;
     transform: none !important;
@@ -346,7 +328,6 @@ img {
   }
 }
 
-/* Стили для кнопки "Позвонить" */
 .call-button {
   transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   border: none;
@@ -471,8 +452,6 @@ img {
   }
 }
 
-/* Кастомный скроллбар */
-/* Для WebKit браузеров (Chrome, Safari, новый Edge) */
 ::-webkit-scrollbar {
   width: 12px;
   height: 12px;
@@ -494,13 +473,11 @@ img {
   background: linear-gradient(135deg, #d32f2f, var(--primary));
 }
 
-/* Для Firefox */
 * {
   scrollbar-width: thin;
   scrollbar-color: var(--primary) #f1f1f1;
 }
 
-/* Анимация "выскакивания" скроллбара */
 ::-webkit-scrollbar-thumb {
   transition: all 0.2s ease;
 }
@@ -509,19 +486,16 @@ img {
   background: var(--secondary);
 }
 
-/* Углы скроллбара */
 ::-webkit-scrollbar-corner {
   background: #f1f1f1;
 }
 
-/* Скрыть футер на странице 404 - добавляю дополнительные стили */
 .notfound-page ~ #footer-container,
 .notfound-page ~ footer,
 body.page-404 .default-footer {
   display: none !important;
 }
 
-/* Убедиться, что основной контент на странице 404 имеет минимальную высоту */
 .notfound-page,
 body.page-404 main {
   min-height: 100vh;

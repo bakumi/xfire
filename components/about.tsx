@@ -9,7 +9,6 @@ const About = () => {
 
   return (
     <section id="about" className="py-16 md:py-24 bg-gray-50 relative overflow-hidden">
-      {/* Декоративные элементы */}
       <div className="absolute top-0 left-0 w-full h-20 bg-gradient-to-b from-white to-transparent"></div>
       <div className="absolute bottom-0 left-0 w-full h-20 bg-gradient-to-t from-white to-transparent"></div>
 
@@ -30,13 +29,11 @@ const About = () => {
           </p>
         </div>
 
-        {/* Секция "Наша миссия" - улучшенное расположение */}
         <div
           className="bg-white rounded-xl shadow-md p-8 mb-16 relative overflow-hidden"
           data-scroll-animation="slideUp"
           data-animation-duration="1.2"
         >
-          {/* Декоративные элементы */}
           <div className="absolute -top-10 -right-10 w-32 h-32 rounded-full bg-secondary/10 -z-10"></div>
           <div className="absolute -bottom-10 -left-10 w-32 h-32 rounded-full bg-primary/10 -z-10"></div>
 
@@ -214,7 +211,6 @@ const About = () => {
             data-animation-delay="0.1"
             data-animation-duration="0.8"
           >
-            {/* Декоративные элементы фона */}
             <div className="absolute right-0 top-0 w-40 h-40 opacity-10">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="w-full h-full text-primary">
                 <path d="M0 0h24v24H0z" fill="none"/>
@@ -222,10 +218,8 @@ const About = () => {
               </svg>
             </div>
 
-            {/* Цветная рамка сверху */}
             <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-primary to-secondary rounded-t-2xl"></div>
             
-            {/* Большая иконка */}
             <div className="relative mb-8 flex items-center justify-center">
               <div className="absolute inset-0 bg-primary/10 rounded-full transform scale-[1.8] group-hover:scale-[2] transition-transform duration-500"></div>
               <div className="relative bg-white p-5 rounded-full shadow-md transform group-hover:rotate-12 transition-transform duration-500">
@@ -233,7 +227,6 @@ const About = () => {
               </div>
             </div>
             
-            {/* Контент */}
             <div className="text-center">
               <div className="text-6xl font-bold mb-4 text-gray-800 group-hover:text-primary transition-colors duration-300">
                 10<span className="text-primary">+</span>
@@ -250,7 +243,6 @@ const About = () => {
             data-animation-delay="0.3"
             data-animation-duration="0.8"
           >
-            {/* Декоративные элементы фона */}
             <div className="absolute right-0 top-0 w-40 h-40 opacity-10">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="w-full h-full text-primary">
                 <path d="M0 0h24v24H0z" fill="none"/>
@@ -258,10 +250,8 @@ const About = () => {
               </svg>
             </div>
 
-            {/* Цветная рамка сверху */}
             <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-primary to-secondary rounded-t-2xl"></div>
             
-            {/* Большая иконка */}
             <div className="relative mb-8 flex items-center justify-center">
               <div className="absolute inset-0 bg-primary/10 rounded-full transform scale-[1.8] group-hover:scale-[2] transition-transform duration-500"></div>
               <div className="relative bg-white p-5 rounded-full shadow-md transform group-hover:rotate-12 transition-transform duration-500">
@@ -269,7 +259,6 @@ const About = () => {
               </div>
             </div>
             
-            {/* Контент */}
             <div className="text-center">
               <div className="text-6xl font-bold mb-4 text-gray-800 group-hover:text-primary transition-colors duration-300">
                 500<span className="text-primary">+</span>
@@ -286,7 +275,6 @@ const About = () => {
             data-animation-delay="0.5"
             data-animation-duration="0.8"
           >
-            {/* Декоративные элементы фона */}
             <div className="absolute right-0 top-0 w-40 h-40 opacity-10">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="w-full h-full text-primary">
                 <path d="M0 0h24v24H0z" fill="none"/>
@@ -294,10 +282,8 @@ const About = () => {
               </svg>
             </div>
 
-            {/* Цветная рамка сверху */}
             <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-primary to-secondary rounded-t-2xl"></div>
             
-            {/* Большая иконка */}
             <div className="relative mb-8 flex items-center justify-center">
               <div className="absolute inset-0 bg-primary/10 rounded-full transform scale-[1.8] group-hover:scale-[2] transition-transform duration-500"></div>
               <div className="relative bg-white p-5 rounded-full shadow-md transform group-hover:rotate-12 transition-transform duration-500">
@@ -305,7 +291,6 @@ const About = () => {
               </div>
             </div>
             
-            {/* Контент */}
             <div className="text-center">
               <div className="text-6xl font-bold mb-4 text-gray-800 group-hover:text-primary transition-colors duration-300">
                 1000<span className="text-primary">+</span>

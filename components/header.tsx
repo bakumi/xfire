@@ -7,19 +7,13 @@ import ContactModal from "./contact-modal"
 import { Button } from "./ui/button"
 import { useTheme } from "next-themes"
 
-// Компонент красного квадрата с кружком в центре
 const RedSquareWithCircle = () => {
   return (
     <div className="relative w-10 h-10">
-      {/* Внешняя красная рамка */}
       <div className="absolute inset-0 bg-red-600"></div>
-      {/* Внутренняя белая рамка */}
       <div className="absolute inset-[2px] bg-white"></div>
-      {/* Внутренний красный квадрат */}
       <div className="absolute inset-[5px] bg-red-600 flex items-center justify-center">
-        {/* Белый круг */}
         <div className="w-6 h-6 bg-white rounded-full flex items-center justify-center">
-          {/* Красный кружок в центре */}
           <div className="w-2 h-2 bg-red-600 rounded-full"></div>
         </div>
       </div>
@@ -34,8 +28,7 @@ const Header = () => {
   const [isMounted, setIsMounted] = useState(false)
   const { theme } = useTheme()
 
-  // Улучшенная логика отслеживания прокрутки с меньшей частотой вызовов
-  const handleScroll = useCallback(() => {
+  const handleScroll = useCallback = useCallback(() => {
     if (window.scrollY > 50) {
       if (!isScrolled) setIsScrolled(true)
     } else {
@@ -46,10 +39,8 @@ const Header = () => {
   useEffect(() => {
     setIsMounted(true)
     
-    // Инициализация состояния при загрузке
     handleScroll()
 
-    // Оптимизированный слушатель с троттлингом
     let ticking = false;
     const scrollListener = () => {
       if (!ticking) {
@@ -84,7 +75,7 @@ const Header = () => {
     const section = document.getElementById(sectionId)
     if (section) {
       window.scrollTo({
-        top: section.offsetTop - 80, // Учитываем высоту шапки
+        top: section.offsetTop - 80,
         behavior: "smooth",
       })
     }
@@ -98,9 +89,8 @@ const Header = () => {
     })
   }
 
-  // Возвращаем заглушку до монтирования компонента
   if (!isMounted) {
-    return null // Предотвращаем мерцание при гидратации
+    return null
   }
 
   return (
@@ -123,7 +113,6 @@ const Header = () => {
             </div>
           </Link>
 
-          {/* Десктопное меню */}
           <nav className="hidden md:flex items-center gap-8">
             <button
               onClick={() => scrollToSection("hero")}
@@ -187,7 +176,6 @@ const Header = () => {
             </button>
           </nav>
 
-          {/* Мобильное меню */}
           <button
             className="md:hidden text-text"
             onClick={toggleMenu}
@@ -197,7 +185,6 @@ const Header = () => {
           </button>
         </div>
 
-        {/* Мобильное меню выпадающее */}
         <div
           className={`md:hidden absolute top-full left-0 right-0 bg-white shadow-md transition-all duration-300 ${
             isMenuOpen ? "max-h-screen opacity-100" : "max-h-0 opacity-0 overflow-hidden"

@@ -14,7 +14,6 @@ const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
   const modalRef = useRef<HTMLDivElement>(null)
   const phoneNumber = "+7 (916) 269-04-03"
 
-  // Управление анимацией открытия/закрытия
   useEffect(() => {
     if (isOpen && animation === 'closed') {
       setAnimation('opening');
@@ -25,7 +24,6 @@ const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
     }
   }, [isOpen, animation]);
 
-  // Предотвращаем прокрутку страницы при открытом модальном окне
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden"
@@ -38,7 +36,6 @@ const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
     }
   }, [isOpen])
 
-  // Обработка нажатия клавиши Escape
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose()
@@ -48,7 +45,6 @@ const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
     return () => window.removeEventListener("keydown", handleKeyDown)
   }, [onClose])
 
-  // Обработка клика вне модального окна
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
@@ -91,7 +87,6 @@ const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
         className={`bg-white rounded-2xl shadow-2xl w-full max-w-md relative z-10 overflow-hidden transform ${animation === 'opening' ? 'scale-95 opacity-0' : animation === 'open' ? 'scale-100 opacity-100' : 'scale-95 opacity-0'} transition-all duration-300 ease-out`}
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Декоративные элементы */}
         <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-primary to-secondary"></div>
         <div className="absolute top-0 right-0">
           <svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" className="opacity-5">
@@ -116,7 +111,6 @@ const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
           </div>
 
           <div className="flex flex-col gap-6">
-            {/* Блок контактов */}
             <div className="grid grid-cols-1 gap-4">
               <div className="flex items-center gap-3 p-4 bg-gray-50 rounded-xl hover:bg-gray-100 transition-all group">
                 <div className="bg-primary/10 p-2.5 rounded-lg transition-colors group-hover:bg-primary/20 group-hover:scale-110 transform duration-200">

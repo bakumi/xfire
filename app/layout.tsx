@@ -9,13 +9,12 @@ import { ServiceProvider } from "./context/ServiceContext"
 import Preloader from "@/components/preloader"
 import MickeyMouse from "@/components/mickey-mouse"
 
-// Оптимизация загрузки шрифтов
 const inter = Inter({
   subsets: ["latin", "cyrillic"],
   variable: "--font-inter",
   display: "swap",
   preload: true,
-  weight: ['400', '500', '600', '700'], // Загружаем только используемые веса
+  weight: ['400', '500', '600', '700'],
 })
 
 const roboto = Roboto({ 

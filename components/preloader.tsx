@@ -3,19 +3,13 @@
 import { useState, useEffect, useRef } from "react"
 import gsap from "gsap"
 
-// Компонент красного квадрата с кружком в центре
 const RedSquareWithCircle = () => {
   return (
     <div className="relative w-16 h-16">
-      {/* Внешняя красная рамка */}
       <div className="absolute inset-0 bg-red-600"></div>
-      {/* Внутренняя белая рамка */}
       <div className="absolute inset-[3px] bg-white"></div>
-      {/* Внутренний красный квадрат */}
       <div className="absolute inset-[6px] bg-red-600 flex items-center justify-center">
-        {/* Белый круг */}
         <div className="w-9 h-9 bg-white rounded-full flex items-center justify-center">
-          {/* Красный кружок в центре */}
           <div className="w-3 h-3 bg-red-600 rounded-full"></div>
         </div>
       </div>
@@ -34,7 +28,6 @@ const Preloader = () => {
 
     if (!preloader || !logo) return
 
-    // Начальная анимация лого
     gsap.set(logo, { scale: 0.8, opacity: 0 })
     const tlIntro = gsap.timeline()
     tlIntro.to(logo, { 
@@ -50,7 +43,6 @@ const Preloader = () => {
         ease: "power1.inOut"
     }, "-=0.5")
 
-    // Таймер для скрытия прелоадера
     const timer = setTimeout(() => {
       const tlOutro = gsap.timeline({ 
         onComplete: () => setIsVisible(false) 
@@ -66,7 +58,7 @@ const Preloader = () => {
           duration: 0.5, 
           ease: "power2.inOut" 
       }, "-=0.2")
-    }, 1000) // Изменяем задержку на 1 секунду
+    }, 1000)
 
     return () => clearTimeout(timer)
   }, [])
@@ -81,7 +73,6 @@ const Preloader = () => {
       <div ref={logoRef} className="flex items-center gap-3">
         <div className="relative w-16 h-16 logo-icon">
           <RedSquareWithCircle />
-          {/* Optional subtle glow */}
           <div className="absolute inset-0 bg-primary/30 blur-lg rounded-full"></div>
         </div>
         <div className="flex flex-col">

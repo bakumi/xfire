@@ -3,7 +3,6 @@ import Link from "next/link"
 import { MapPin, Phone, Mail, MessageSquare } from "lucide-react"
 import dynamic from "next/dynamic"
 
-// Динамический импорт карты для оптимизации производительности
 const Map = dynamic(() => import("@/components/map"), {
   loading: () => <div className="h-[400px] bg-gray-100 rounded-lg animate-pulse"></div>,
   ssr: false,
@@ -12,7 +11,6 @@ const Map = dynamic(() => import("@/components/map"), {
 const Contact = () => {
   return (
     <section id="contact" className="py-16 md:py-24 bg-gray-50 relative overflow-hidden">
-      {/* Декоративные элементы */}
       <div className="absolute top-0 left-0 w-full h-20 bg-gradient-to-b from-white to-transparent"></div>
       <div className="absolute bottom-0 left-0 w-full h-20 bg-gradient-to-t from-white to-transparent"></div>
 
@@ -40,7 +38,6 @@ const Contact = () => {
 
           <div className="animate-on-scroll">
             <div className="bg-white p-8 rounded-xl shadow-md mb-8 relative overflow-hidden">
-              {/* Декоративные элементы */}
               <div className="absolute -top-10 -left-10 w-20 h-20 rounded-full bg-secondary/10 z-0"></div>
               <div className="absolute -bottom-10 -right-10 w-20 h-20 rounded-full bg-primary/10 z-0"></div>
 

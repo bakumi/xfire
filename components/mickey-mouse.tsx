@@ -3,36 +3,34 @@
 import { useState, useEffect, useRef } from "react"
 import Image from "next/image"
 
-// Настройки для Микки Мауса
-const SHOW_MICKEY = true // Глобальный переключатель для отображения
+const SHOW_MICKEY = true
 const MICKEY_CONFIG = {
-  size: 130, // Размер в пикселях
-  bottom: -7, // Отступ снизу в пикселях
-  animate: true, // Включить анимацию
-  speed: 1.5, // Скорость перемещения (пикселей в кадр)
-  bounce: false, // Включить анимацию подпрыгивания
-  startOffscreen: true, // Начинать за пределами экрана при анимации
-  staticPosition: 40, // Позиция слева (в px) при отключенной анимации
-  reverseOnEdge: true, // true - разворачиваться на краю экрана, false - начинать заново
-  respawnDelay: 3000, // Задержка перед повторным появлением в мс (если reverseOnEdge = false)
-  mirrorWhenReversed: true, // Отзеркаливать изображение при движении в другую сторону
-  initiallyMirrored: false, // Начальное состояние отзеркаливания (до начала движения)
-  initialDirection: -1, // Начальное направление движения (1 - вправо, -1 - влево)
-  animationMode: 'linear', // Режим анимации: 'linear' - по горизонтали, 'square' - по периметру
-  distanceFromEdge: 0, // Отступ от края экрана при движении по периметру (в пикселях)
-  navbarHeight: 80, // Высота навигационного меню (в пикселях)
-  respectNavbar: true, // Учитывать высоту навигационного меню при движении по верхнему краю
-  showOnMobile: true, // Показывать ли Микки на мобильных устройствах
-  mobileSize: 80, // Размер Микки на мобильных устройствах (в пикселях)
+  size: 130,
+  bottom: -7,
+  animate: true,
+  speed: 1.5,
+  bounce: false,
+  startOffscreen: true,
+  staticPosition: 40,
+  reverseOnEdge: true,
+  respawnDelay: 3000,
+  mirrorWhenReversed: true,
+  initiallyMirrored: false,
+  initialDirection: -1,
+  animationMode: 'linear',
+  distanceFromEdge: 0,
+  navbarHeight: 80,
+  respectNavbar: true,
+  showOnMobile: true,
+  mobileSize: 80,
 }
 
 
-// Перечисление для сторон квадрата
 enum SquareSide {
-  BOTTOM = 0, // Внизу
-  RIGHT = 1,  // Справа 
-  TOP = 2,    // Вверху
-  LEFT = 3    // Слева
+  BOTTOM = 0,
+  RIGHT = 1,
+  TOP = 2,
+  LEFT = 3
 }
 
 const MickeyMouse = () => {
@@ -45,22 +43,20 @@ const MickeyMouse = () => {
   })
   const [isMoving, setIsMoving] = useState(true)
   const [isReversed, setIsReversed] = useState(MICKEY_CONFIG.initiallyMirrored)
-  const [rotation, setRotation] = useState(0) // Угол поворота в градусах
-  const [windowHeight, setWindowHeight] = useState(0) // Сохраняем высоту окна в состоянии
-  const [isMounted, setIsMounted] = useState(false) // Флаг монтирования компонента
-  const [navbarHeight, setNavbarHeight] = useState(MICKEY_CONFIG.navbarHeight) // Высота навигационного меню
+  const [rotation, setRotation] = useState(0)
+  const [windowHeight, setWindowHeight] = useState(0)
+  const [isMounted, setIsMounted] = useState(false)
+  const [navbarHeight, setNavbarHeight] = useState(MICKEY_CONFIG.navbarHeight)
   const [isMobile, setIsMobile] = useState(false)
   const requestRef = useRef<number | null>(null)
   const bounceRef = useRef(0)
   const directionRef = useRef(MICKEY_CONFIG.initialDirection)
-  const squareSideRef = useRef<SquareSide>(SquareSide.BOTTOM) // Текущая сторона квадрата
+  const squareSideRef = useRef<SquareSide>(SquareSide.BOTTOM)
   
-  // Эффект для проверки монтирования компонента и размеров окна
   useEffect(() => {
     setIsMounted(true)
     setWindowHeight(window.innerHeight)
     
-    // Получаем высоту навигационного меню при монтировании
     try {
       const navbar = document.querySelector('header') || document.querySelector('nav')
       if (navbar) {
@@ -68,7 +64,6 @@ const MickeyMouse = () => {
         setNavbarHeight(navbarRect.height)
       }
     } catch (error) {
-      // Ошибка при получении высоты меню
     }
     
     const handleResize = () => {
@@ -77,7 +72,6 @@ const MickeyMouse = () => {
       setShowMickey(MICKEY_CONFIG.showOnMobile || !isMobileView ? SHOW_MICKEY : false)
       setWindowHeight(window.innerHeight)
       
-      // Обновляем высоту навигационного меню при изменении размера окна
       try {
         const navbar = document.querySelector('header') || document.querySelector('nav')
         if (navbar) {
@@ -85,7 +79,6 @@ const MickeyMouse = () => {
           setNavbarHeight(navbarRect.height)
         }
       } catch (error) {
-        // Ошибка при получении высоты меню при ресайзе
       }
     }
     
@@ -94,31 +87,29 @@ const MickeyMouse = () => {
     return () => window.removeEventListener('resize', handleResize)
   }, [])
   
-  // Функция для обновления вращения в зависимости от стороны квадрата
   const updateRotationBySide = (side: SquareSide) => {
     switch (side) {
       case SquareSide.BOTTOM:
-        setRotation(0) // Базовое положение - ногами вниз
-        setIsReversed(false) // Спиной вперед по нижнему краю (направление вправо)
+        setRotation(0)
+        setIsReversed(false)
         break
       case SquareSide.RIGHT:
-        setRotation(270) // Поворот на 270 градусов - ногами влево
-        setIsReversed(false) // Спиной вперед по правому краю (направление вверх)
+        setRotation(270)
+        setIsReversed(false)
         break
       case SquareSide.TOP:
-        setRotation(180) // Поворот на 180 градусов - ногами вверх
-        setIsReversed(false) // Спиной вперед по верхнему краю (направление влево)
+        setRotation(180)
+        setIsReversed(false)
         break
       case SquareSide.LEFT:
-        setRotation(90) // Поворот на 90 градусов - ногами вправо
-        setIsReversed(false) // Спиной вперед по левому краю (направление вниз)
+        setRotation(90)
+        setIsReversed(false)
         break
     }
   }
   
-  // Функция для движения по периметру (квадрату)
   const moveInSquare = (prev: { x: number, y: number }) => {
-    if (!isMounted) return prev; // Не обновляем позицию до монтирования
+    if (!isMounted) return prev;
     
     const windowWidth = window.innerWidth;
     const windowHeight = window.innerHeight;
@@ -130,12 +121,10 @@ const MickeyMouse = () => {
     let sideSwitched = false;
     let newSide = squareSideRef.current;
     
-    // В зависимости от текущей стороны квадрата
     switch (squareSideRef.current) {
-      case SquareSide.BOTTOM: // Движение по нижнему краю слева направо
+      case SquareSide.BOTTOM:
         newX = prev.x + MICKEY_CONFIG.speed;
         
-        // Проверка достижения правого края
         if (newX > windowWidth - MICKEY_CONFIG.size - edgeDistance) {
           newSide = SquareSide.RIGHT;
           sideSwitched = true;
@@ -143,10 +132,9 @@ const MickeyMouse = () => {
         }
         break;
         
-      case SquareSide.RIGHT: // Движение по правому краю снизу вверх
+      case SquareSide.RIGHT:
         newY = prev.y + MICKEY_CONFIG.speed;
         
-        // Проверка достижения верхнего края (с учетом меню)
         if (newY > windowHeight - MICKEY_CONFIG.size - edgeDistance - effectiveNavbarHeight) {
           newSide = SquareSide.TOP;
           sideSwitched = true;
@@ -154,10 +142,9 @@ const MickeyMouse = () => {
         }
         break;
         
-      case SquareSide.TOP: // Движение по верхнему краю справа налево
+      case SquareSide.TOP:
         newX = prev.x - MICKEY_CONFIG.speed;
         
-        // Проверка достижения левого края
         if (newX < edgeDistance) {
           newSide = SquareSide.LEFT;
           sideSwitched = true;
@@ -165,10 +152,9 @@ const MickeyMouse = () => {
         }
         break;
         
-      case SquareSide.LEFT: // Движение по левому краю сверху вниз
+      case SquareSide.LEFT:
         newY = prev.y - MICKEY_CONFIG.speed;
         
-        // Проверка достижения нижнего края (замыкание квадрата)
         if (newY < edgeDistance) {
           newSide = SquareSide.BOTTOM;
           sideSwitched = true;
@@ -177,13 +163,11 @@ const MickeyMouse = () => {
         break;
     }
     
-    // Если сторона изменилась, обновляем и применяем новое вращение
     if (sideSwitched) {
       squareSideRef.current = newSide;
       updateRotationBySide(newSide);
     }
     
-    // Обработка подпрыгивания, если включено
     let bounceY = 0;
     if (MICKEY_CONFIG.bounce) {
       bounceRef.current += 0.05;
@@ -196,16 +180,13 @@ const MickeyMouse = () => {
     };
   };
   
-  // Функция для линейного движения (исходная реализация)
   const moveLinear = (prev: { x: number, y: number }) => {
-    if (!isMounted) return prev; // Не обновляем позицию до монтирования
+    if (!isMounted) return prev;
     
     const newX = prev.x + (MICKEY_CONFIG.speed * directionRef.current);
     const windowWidth = window.innerWidth;
     
-    // Проверка достижения края экрана
     if (newX > windowWidth && !MICKEY_CONFIG.reverseOnEdge) {
-      // Режим респауна - останавливаем движение и запускаем таймер для возврата
       setIsMoving(false);
       setTimeout(() => {
         setPosition({
@@ -216,21 +197,18 @@ const MickeyMouse = () => {
         if (MICKEY_CONFIG.mirrorWhenReversed) {
           setIsReversed(MICKEY_CONFIG.initiallyMirrored);
         }
-        setRotation(0); // Сбрасываем поворот
+        setRotation(0);
         setIsMoving(true);
       }, MICKEY_CONFIG.respawnDelay);
       
       return prev;
     } else if (newX > windowWidth && MICKEY_CONFIG.reverseOnEdge) {
-      // Режим разворота
       directionRef.current = -1;
       if (MICKEY_CONFIG.mirrorWhenReversed) {
-        // Инвертируем начальное состояние при смене направления
         setIsReversed(!MICKEY_CONFIG.initiallyMirrored);
       }
       return { ...prev, x: windowWidth };
     } else if (newX < -MICKEY_CONFIG.size && !MICKEY_CONFIG.reverseOnEdge) {
-      // Режим респауна с левого края
       setIsMoving(false);
       setTimeout(() => {
         setPosition({
@@ -241,22 +219,19 @@ const MickeyMouse = () => {
         if (MICKEY_CONFIG.mirrorWhenReversed) {
           setIsReversed(MICKEY_CONFIG.initiallyMirrored);
         }
-        setRotation(0); // Сбрасываем поворот
+        setRotation(0);
         setIsMoving(true);
       }, MICKEY_CONFIG.respawnDelay);
       
       return prev;
     } else if (newX < -MICKEY_CONFIG.size && MICKEY_CONFIG.reverseOnEdge) {
-      // Режим разворота
       directionRef.current = 1;
       if (MICKEY_CONFIG.mirrorWhenReversed) {
-        // Восстанавливаем начальное состояние при возврате к исходному направлению
         setIsReversed(MICKEY_CONFIG.initiallyMirrored);
       }
       return { ...prev, x: -MICKEY_CONFIG.size };
     }
     
-    // Обновление позиции по вертикали (подпрыгивание)
     let newY = 0;
     if (MICKEY_CONFIG.bounce) {
       bounceRef.current += 0.05;
@@ -266,29 +241,23 @@ const MickeyMouse = () => {
     return { x: newX, y: newY };
   };
   
-  // Эффект для управления анимацией движения Микки
   useEffect(() => {
     if (!showMickey || !MICKEY_CONFIG.animate || !isMoving || !isMounted) return;
     
-    // Инициализируем начальное состояние направления и отзеркаливания
     directionRef.current = MICKEY_CONFIG.initialDirection;
     
-    // Начальное состояние отзеркаливания в зависимости от режима анимации
     if (MICKEY_CONFIG.animationMode === 'linear') {
-      // В линейном режиме отзеркаливаем исходя из направления
       if (MICKEY_CONFIG.mirrorWhenReversed) {
         setIsReversed(MICKEY_CONFIG.initialDirection === -1 ? true : MICKEY_CONFIG.initiallyMirrored);
       } else {
         setIsReversed(MICKEY_CONFIG.initiallyMirrored);
       }
     } else {
-      // В режиме квадрата начальное вращение на основе стороны
       updateRotationBySide(squareSideRef.current);
     }
     
     const animate = () => {
       setPosition(prev => {
-        // Выбираем режим анимации
         if (MICKEY_CONFIG.animationMode === 'square') {
           return moveInSquare(prev);
         } else {
@@ -308,25 +277,20 @@ const MickeyMouse = () => {
       }
     };
   }, [showMickey, isMoving, isMounted]);
-
-  // Если Микки Маус не должен отображаться или компонент не смонтирован, возвращаем null
+  
   if (!showMickey || !isMounted) return null;
   
-  // Если Микки Маус в режиме респауна и анимация включена, скрываем его
   if (!isMoving && MICKEY_CONFIG.animate && !MICKEY_CONFIG.reverseOnEdge) {
     return null;
   }
 
-  // Определение стилей позиционирования в зависимости от режима анимации
   const positionStyles = MICKEY_CONFIG.animationMode === 'square' 
     ? {
-        // В режиме квадрата используем напрямую координаты x и y
         bottom: 'auto',
         left: `${position.x}px`,
         top: `${windowHeight - position.y - MICKEY_CONFIG.size}px`,
       }
     : {
-        // В линейном режиме используем bottom и left
         bottom: `${MICKEY_CONFIG.bottom}px`,
         left: `${position.x}px`,
         transform: `translateY(${position.y}px)`,
